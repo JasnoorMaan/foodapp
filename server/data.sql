@@ -55,5 +55,22 @@ VALUES
   (3, 5, 'north', 5, 1.5, 0);    -- Dairy, default per km price, no fixed price
 
 
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO electric;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO electric;
+SELECT 
+  o.name AS organization_name,
+  i.type AS item_type,
+  i.description AS item_description,
+  p.zone,
+  p.base_distance_in_km,
+  p.km_price,
+  p.fix_price
+FROM organisation o
+INNER JOIN pricing p ON o.id = p.organization_id
+INNER JOIN item i ON p.item_id = i.id;
+
+
+
+BEGIN
+INSERT INTO organisation(name) VALUES ($1) RETURNING id
+INSERT INTO item(type, description) VALUES ($1, $2) RETURNING id
+INSERT INTO pricing(organization_id, item_id, base_distance_in_km) VALUES ($1, $2, $3) 
+COMMIT
