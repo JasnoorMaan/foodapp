@@ -11,6 +11,6 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json());
 
-app.use("/api", routes);
+app.use("/", routes);
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
