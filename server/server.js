@@ -1,7 +1,8 @@
 const PORT = process.env.PORT ?? 8000;
-const priceService = require("./service/pricingService");
+// const priceService = require("./service/pricingService");
 const express = require("express");
 const app = express();
+
 const cors = require("cors");
 const routes = require("./routes/routes");
 
