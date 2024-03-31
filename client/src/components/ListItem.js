@@ -11,12 +11,15 @@ const ListItem = ({ place }) => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/price", {
-        zone: place.zone,
-        organization_id: place.organization_id,
-        total_distance: place.base_distance_in_km,
-        item_type: place.item_type,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVERURL}/price`,
+        {
+          zone: place.zone,
+          organization_id: place.organization_id,
+          total_distance: place.base_distance_in_km,
+          item_type: place.item_type,
+        }
+      );
 
       setDeliveryPrice(response.data.total_price);
     } catch (err) {

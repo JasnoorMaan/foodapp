@@ -8,7 +8,7 @@ const App = () => {
   const [places, setPlaces] = useState(null);
   const getData = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api`);
+      const response = await fetch(`${process.env.REACT_APP_SERVERURL}`);
       const json = await response.json();
       setPlaces(json);
     } catch (err) {
